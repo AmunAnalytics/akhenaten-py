@@ -41,4 +41,4 @@ print(result['fig_url']) # direct html access
 ## Alternative usage
 This service is backed by minio which is fully AWS S3 compatible.
 Thus if you would like more extensive features you can use the ```boto3``` package.  
-The hosting url will then be https://s3.akheaten.eu/<bucketname>/<slugname>.json
+The hosting url will then be https://s3.akheaten.eu/BUCKET_NAME/ITEM_NAME.json

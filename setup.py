@@ -34,11 +34,10 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Scientific/Engineering',
 
-        # Pick your license as you wish (should match "license" above)
         'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10'
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11'
     ],
 

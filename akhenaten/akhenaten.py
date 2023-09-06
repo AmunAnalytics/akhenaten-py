@@ -4,7 +4,7 @@ from uuid import uuid4
 import os
 
 __title__ = "akhenaten-py"
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Frank Boerman"
 __license__ = "MIT"
 
@@ -12,14 +12,21 @@ __license__ = "MIT"
 class AkhenatenClient:
     AKHENATEN_URL = "s3.akhenaten.eu"
 
-    def __init__(self, akhenaten_id=None, akhenaten_key=None):
+    def __init__(self, akhenaten_id=None, akhenaten_key=None, bucket_name=None):
         if akhenaten_id is None:
             akhenaten_id = os.getenv('AKHENATEN_ID')
         if akhenaten_key is None:
             akhenaten_key = os.getenv('AKHENATEN_KEY')
+        if bucket_name is None:
+            self.bucket_name = os.getenv('AKHENATEN_BUCKET')
+        else:
+            self.bucket_name = bucket_name
 
-        if akhenaten_id is None or akhenaten_key is None:
-            raise Exception("Missing AKHENATEN_ID or AKHENATEN_KEY!")
+        if self.bucket_name is None:
+            self.bucket_name = 'b' + akhenaten_id[1:]
+
+        if akhenaten_id is None or akhenaten_key is None or self.bucket_name is None:
+            raise Exception("Missing AKHENATEN_ID or AKHENATEN_KEY or AKHENATEN_BUCKET!")
 
         self.akhenaten = Minio(
             endpoint=self.AKHENATEN_URL,
@@ -27,8 +34,6 @@ class AkhenatenClient:
             secret_key=akhenaten_key,
             region="akhenaten"
         )
-
-        self.bucket_name = 'b' + akhenaten_id[1:]
 
     def list_figs(self):
         return [x.object_name.strip('.json') for x in self.akhenaten.list_objects(self.bucket_name)

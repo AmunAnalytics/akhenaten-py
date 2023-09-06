@@ -36,7 +36,6 @@ setup(
 
         'License :: OSI Approved :: MIT License',
 
-        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11'
     ],
@@ -45,7 +44,7 @@ setup(
 
     packages=find_packages(),
 
-    install_requires=['minio'],
+    install_requires=['minio', 'pydantic[email]', 'plotly'],
 
     package_data={
         'akhenaten-py': ['LICENSE.md', 'README.md'],

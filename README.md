@@ -19,11 +19,12 @@ import os
 os.environ['AKHENATEN_ID'] = '<your client ID>'
 os.environ['AKHENATEN_KEY'] = '<your client key'
 
-from akhenaten import AkhenatenClient
+from akhenaten import AkhenatenClient, MetadataClass
 client_hoster = AkhenatenClient(
     # not needed when using environment variables!
     akhenaten_id ='<your client ID>',
-    akhenaten_key='<your client key>'
+    akhenaten_key='<your client key>',
+    bucket_name='<bucketname>' # only applicable if you are using custom access key, otherwise deduced from client id
 )
 # get all current uploaded figs
 print(client_hoster.list_figs())
@@ -32,10 +33,18 @@ print(client_hoster.list_figs())
 fig = get_some_plotly_fig()
 # upload it and display the urls
 # if no slug is specified then a random uuid4 will be generated
-result = client_hoster.upload_fig(fig, slug='<optional slug>')
+result = client_hoster.upload_fig(fig, slug='<optional slug>',
+  meta_obj = MetadataClass(
+            title='some plot title',
+            author='some author'
+        ))
 
 print(result['json_url']) # the url to use in your own embedding
 print(result['fig_url']) # direct html access
+
+# to get back a fig to plotly
+fig, meta_obj = client_hoster.download_fig('<slug>')
+
 ```
 
 ## Alternative usage

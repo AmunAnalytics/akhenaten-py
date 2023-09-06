@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "akhenaten-py"
+version = "0.1.0"
+description = "Client to use the plotly hosting service at akhenaten.eu"
+authors = ["thesethtruth <s.w.p.vanwieringen@gmail.com>", "fboerman <frank@fboerman.nl>"]
+license = "LICENSE.md"
+readme = "README.md"
+packages = [{include = "akhenaten"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+minio = "^7.1.16"
+pydantic = "^2.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

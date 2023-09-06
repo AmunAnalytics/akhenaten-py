@@ -15,7 +15,7 @@ class MetaData(BaseModel):
     author: str = None
     title: str = None
     description: str = None
-    AnyUrl: str = None
+    avatar: AnyUrl = None
     date: str = None
 
     def model_post_init(self, __context):
